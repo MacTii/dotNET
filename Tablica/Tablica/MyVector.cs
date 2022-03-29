@@ -14,26 +14,55 @@ namespace Tablica
 
         public int Size { get; private set; } // number of elements in the array
 
-        public MyVector(int N) // N = number of elements
+        public MyVector(int N) // N = number of elements | allocate N elements to vector
         {
             myVector = new int[N];
+            Capacity = N;
+            Size = 0;
         }
 
         public int this[int index] // an indexer of type int     
         {
             get
             {
+                if (index < 0 || index >= Capacity)
+                    throw new IndexOutOfRangeException("Index was out of range"); // throwing an exception when index < 0
+
                 return myVector[index];
             }
             set
             {
+                if (index < 0)
+                    throw new IndexOutOfRangeException("Index was out of range"); // throwing an exception when index < 0
+
+                else if (index >= Capacity)
+                    Allocate(index + 1);
+
                 myVector[index] = value;
             }
         }
 
         public void Add(int value)
         {
+            if(Size >= Capacity) // if size>=capacity allocate 2*N memory of elements
+            {
+                Allocate(2 * Capacity);
+            }
 
+            myVector[Size] = value;
+            Size++;
+        }
+
+        private void Allocate(int N)
+        {
+            if (N < 0)
+                throw new IndexOutOfRangeException("Index was out of range");
+
+            int[] myNewVector = new int[N];
+            Array.Copy(myVector, myNewVector, Size);
+
+            Capacity = N;
+            myVector = myNewVector;
         }
     }
 }
