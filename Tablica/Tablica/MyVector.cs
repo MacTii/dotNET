@@ -44,7 +44,7 @@ namespace Tablica
 
         public void ShowVector() // show elements in vector
         {
-            Console.WriteLine("Vector: ({0}).", string.Join(", ", myVector));
+            Console.WriteLine(string.Format("Vector: ({0}).", string.Join(", ", myVector)));
         }
 
         public void ShowCapacity() // show capacity of vector
