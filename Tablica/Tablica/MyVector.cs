@@ -42,6 +42,21 @@ namespace Tablica
             }
         }
 
+        public void ShowVector() // show elements in vector
+        {
+            Console.WriteLine("Vector: ({0}).", string.Join(", ", myVector));
+        }
+
+        public void ShowCapacity() // show capacity of vector
+        {
+            Console.WriteLine("Capacity = " + Capacity);
+        }
+
+        public void ShowSize() // show size of vector
+        {
+            Console.WriteLine("Size = " + Size);
+        }
+
         public void Add(int value)
         {
             if(Size >= Capacity) // if size>=capacity allocate 2*N memory of elements
