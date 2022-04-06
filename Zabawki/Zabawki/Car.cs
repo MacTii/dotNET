@@ -15,11 +15,13 @@ namespace Zabawki
     {
         private int speed;
         private static int count = 0;
+        private string name;
 
         public Car(int speed)
         {
             Speed = speed;
             count++;
+            name = "Car " + count;
         }
 
         public int Speed
@@ -38,7 +40,7 @@ namespace Zabawki
 
         public override string ToString()
         {
-            return "Car " + count;
+            return name;
         }
     }
 }
