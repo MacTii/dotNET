@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace Zabawki
 {
-    public interface IAccelerate
-    {
-        int Speed { get; set; }
-    }
-
     class Car : IAccelerate
     {
         private int speed;

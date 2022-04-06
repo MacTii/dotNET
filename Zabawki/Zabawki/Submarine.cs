@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace Zabawki
 {
-    public interface IDive
-    {
-        int Depth { get; set; }
-    }
-
     class Submarine : IAccelerate, IDive
     {
         private int speed;
