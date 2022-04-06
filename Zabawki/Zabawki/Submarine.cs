@@ -16,12 +16,14 @@ namespace Zabawki
         private int speed;
         private static int count = 0;
         private int depth;
+        private string name;
 
         public Submarine(int speed, int depth)
         {
             Speed = speed;
             Depth = depth;
             count++;
+            name = "Submarine " + count;
         }
 
         public int Depth
@@ -54,7 +56,7 @@ namespace Zabawki
 
         public override string ToString()
         {
-            return "Submarine " + count;
+            return name;
         }
     }
 }
