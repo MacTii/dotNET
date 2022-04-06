@@ -27,8 +27,10 @@ namespace Zabawki
 
         private void AddObject(object sender, EventArgs e)
         {
-            string item = listOfObjects.SelectedItem.ToString();
-            switch(item)
+            var item = listOfObjects.SelectedItem;
+            if (item == null)
+                return;
+            switch(item.ToString())
             {
                 case "Car":
                     addedObjects.Items.Add(new Car(0));
@@ -47,7 +49,10 @@ namespace Zabawki
 
         private void DeleteObject(object sender, EventArgs e)
         {
-            addedObjects.Items.Remove(addedObjects.SelectedItem);
+            var item = addedObjects.SelectedItem;
+            if (item == null)
+                return;
+            addedObjects.Items.Remove(item);
         }
 
         private void AddedObjects_SelectedIndexChanged(object sender, EventArgs e)
