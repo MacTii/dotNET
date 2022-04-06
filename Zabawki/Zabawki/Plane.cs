@@ -16,12 +16,14 @@ namespace Zabawki
         private int speed;
         private int rise;
         private static int count = 0;
+        private string name;
 
         public Plane(int speed, int rise)
         {
             Speed = speed;
             Rise = rise;
             count++;
+            name = "Plane " + count;
         }
 
         public int Speed
@@ -54,7 +56,7 @@ namespace Zabawki
 
         public override string ToString()
         {
-            return "Plane " + count;
+            return name;
         }
     }
 }
