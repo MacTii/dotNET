@@ -10,14 +10,11 @@ namespace Tablica
     {
         private int[] myVector;
 
-        public int Capacity { get; private set; } // array capacity 
-
         public int Size { get; private set; } // number of elements in the array
 
         public MyVector(int N) // N = number of elements | allocate N elements to vector
         {
             myVector = new int[N];
-            Capacity = N;
             Size = 0;
         }
 
@@ -25,7 +22,7 @@ namespace Tablica
         {
             get
             {
-                if (index < 0 || index >= Capacity)
+                if (index < 0 || index >= myVector.Length)
                     throw new IndexOutOfRangeException("Index was out of range"); // throwing an exception when index < 0
 
                 return myVector[index];
@@ -35,8 +32,8 @@ namespace Tablica
                 if (index < 0)
                     throw new IndexOutOfRangeException("Index was out of range"); // throwing an exception when index < 0
 
-                else if (index >= Capacity)
-                    Allocate(index + 1);
+                if (index >= myVector.Length)
+                    Allocate(2 * index);
 
                 myVector[index] = value;
             }
@@ -47,24 +44,24 @@ namespace Tablica
             Console.WriteLine(string.Format("Vector: ({0}).", string.Join(", ", myVector)));
         }
 
-        public void ShowCapacity() // show capacity of vector
+        public void ShowLength() // show capacity of vector
         {
-            Console.WriteLine("Capacity = " + Capacity);
+            Console.WriteLine("Length of memory allocated = " + myVector.Length);
         }
 
         public void ShowSize() // show size of vector
         {
-            Console.WriteLine("Size = " + Size);
+            Console.WriteLine("Size of elements = " + Size);
         }
 
         public void Add(int value)
         {
-            if(Size >= Capacity) // if size>=capacity allocate 2*N memory of elements
+            if(Size >= myVector.Length) // if size>=capacity allocate 2*N memory of elements
             {
-                Allocate(2 * Capacity);
+                Allocate(2 * myVector.Length);
             }
 
-            myVector[Size] = value;
+            this[Size] = value;
             Size++;
         }
 
@@ -73,11 +70,7 @@ namespace Tablica
             if (N < 0)
                 throw new IndexOutOfRangeException("Index was out of range");
 
-            int[] myNewVector = new int[N];
-            Array.Copy(myVector, myNewVector, Size);
-
-            Capacity = N;
-            myVector = myNewVector;
+            Array.Resize(ref myVector, N);
         }
     }
 }

@@ -20,14 +20,19 @@ namespace Tablica
 
             // check size, capacity and elements in vector 
             vector.ShowVector();
-            vector.ShowCapacity();
+            vector.ShowLength();
             vector.ShowSize();
+
+            vector.Add(15);
+            vector.ShowLength();
+            vector.ShowSize();
+            vector.ShowVector();
 
             // checking how works indexer
             vector[5] = 69;
 
             vector.ShowVector();
-            vector.ShowCapacity();
+            vector.ShowLength();
             vector.ShowSize();
 
             // adding more elements to check if the allocation was successful
@@ -41,22 +46,22 @@ namespace Tablica
             vector.Add(7);
             vector.Add(7);
             vector.Add(7);
-            vector.ShowCapacity();
+            vector.ShowLength();
 
             // showing vector's operations
             vector.ShowVector();
-            vector.ShowCapacity();
+            vector.ShowLength();
 
             // checking the operation of the indexer
-            vector[vector.Capacity] = 69;
+            vector[vector.Size] = 69;
 
             vector.ShowVector();
-            vector.ShowCapacity();
+            vector.ShowLength();
 
             vector[20] = 69;
 
             vector.ShowVector();
-            vector.ShowCapacity();
+            vector.ShowLength();
         }
     }
 }
