@@ -22,7 +22,7 @@ namespace Tablica
         {
             get
             {
-                if (index < 0 || index >= myVector.Length)
+                if (index < 0 || index >= Size)
                     throw new IndexOutOfRangeException("Index was out of range"); // throwing an exception when index < 0
 
                 return myVector[index];
@@ -33,7 +33,10 @@ namespace Tablica
                     throw new IndexOutOfRangeException("Index was out of range"); // throwing an exception when index < 0
 
                 if (index >= myVector.Length)
-                    Allocate(2 * index);
+                    Allocate(2 * (index + 1));
+
+                if (index >= Size)
+                    Size = index + 1;
 
                 myVector[index] = value;
             }
@@ -56,13 +59,7 @@ namespace Tablica
 
         public void Add(int value)
         {
-            if(Size >= myVector.Length) // if size>=capacity allocate 2*N memory of elements
-            {
-                Allocate(2 * myVector.Length);
-            }
-
-            this[Size] = value;
-            Size++;
+            this[Size++] = value;
         }
 
         private void Allocate(int N)

@@ -24,9 +24,9 @@ namespace Tablica
             vector.ShowSize();
 
             vector.Add(15);
+            vector.ShowVector();
             vector.ShowLength();
             vector.ShowSize();
-            vector.ShowVector();
 
             // checking how works indexer
             vector[5] = 69;
@@ -51,17 +51,30 @@ namespace Tablica
             // showing vector's operations
             vector.ShowVector();
             vector.ShowLength();
+            vector.ShowSize();
 
             // checking the operation of the indexer
             vector[vector.Size] = 69;
 
             vector.ShowVector();
             vector.ShowLength();
+            vector.ShowSize();
 
             vector[20] = 69;
 
             vector.ShowVector();
             vector.ShowLength();
+            vector.ShowSize();
+
+            try
+            {
+                Console.WriteLine(vector[56]);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }
