@@ -11,6 +11,8 @@ namespace Zdarzenia
         static void Main(string[] args)
         {
             MyVector vector = new MyVector(5);
+            vector.MyVectorEventLogSize += vector.ShowSize;
+            vector.MyVectorEventLogAllocate += vector.ShowAllocate;
 
             vector.Add(3);
             vector.Add(15);

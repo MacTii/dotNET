@@ -8,18 +8,33 @@ namespace Zdarzenia
 {
     class MyVector
     {
+        // declare delegate
+        public delegate void MyVectorHandlerSize(int vectorSize);
+        public delegate void MyVectorHandlerAllocate(int vectorLength);
+
+        // declare event
+        public event MyVectorHandlerSize MyVectorEventLogSize;
+        public event MyVectorHandlerAllocate MyVectorEventLogAllocate;
+
+        // method handling event
+        protected virtual void OnSizeChanged(int size)
+        {
+            MyVectorEventLogSize?.Invoke(size);
+        }
+
+        protected virtual void OnAllocateChanged(int length)
+        {
+            MyVectorEventLogAllocate?.Invoke(length);
+        }
+
         private int[] myVector;
 
         public int Size { get; private set; } // number of elements in the array
-
-        Events eventVector;
 
         public MyVector(int N) // N = number of elements | allocate N elements to vector
         {
             myVector = new int[N];
             Size = 0;
-            eventVector = new Events();
-            eventVector.MyVectorEventLog += ShowSize;
         }
 
         public int this[int index] // an indexer of type int     
@@ -37,12 +52,15 @@ namespace Zdarzenia
                     throw new IndexOutOfRangeException("Index was out of range"); // throwing an exception when index < 0
 
                 if (index >= myVector.Length)
+                {
                     Allocate(2 * (index + 1));
+                    OnAllocateChanged(myVector.Length);
+                }
 
                 if (index >= Size)
                 {
                     Size = index + 1;
-                    eventVector.OnSizeChanged(Size);
+                    OnSizeChanged(Size);
                 }
 
                 myVector[index] = value;
@@ -59,15 +77,19 @@ namespace Zdarzenia
             Console.WriteLine("Length of memory allocated = " + myVector.Length);
         }
 
+        public void ShowAllocate(int length)
+        {
+            Console.WriteLine("Event: Memory allocated to length = " + length);
+        }
+
         public void ShowSize(int size) // show size of vector
         {
-            Console.WriteLine("Event: Changed size vector to = " + size);
+            Console.WriteLine("Event: Vector size changed to = " + size);
         }
 
         public void Add(int value)
         {
-            this[Size++] = value;
-            eventVector.OnSizeChanged(Size);
+            this[Size] = value;
         }
 
         private void Allocate(int N)
